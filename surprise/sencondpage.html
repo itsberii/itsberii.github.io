@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENJOY!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #dc99c6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        #choices-section {
+            padding: 80px 20px;
+            text-align: center;
+            background-image: url('background-pattern.png');
+            background-size: cover;
+            background: linear-gradient(to right, #ffcccc, #ffe6e6);
+        }
+
+        #choices-section h2 {
+            font-size: 2.5em;
+            color: #cc0000;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+
+        /* Choices Layout */
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .choice-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            text-align: center;
+            width: 200px;
+            height: 250px;
+        }
+
+        .choice-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            font-weight: bolder;
+            background-color: #ffe6e6; /* Change background on hover */
+        }
+
+        .choice-btn {
+            display: block;
+            padding: 30px;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2em;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        .choice-btn:hover {
+            color: #cc0000; /* Change text color on hover */
+        }
+
+        .choice-icon {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .emoji-heart {
+            font-size: 100px;
+            animation: beat 1s infinite;
+            margin: 20px auto;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        /* Heart Beat Animation */
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .quote {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <section id="choices-section">
+        <h2>Explore Our Story</h2>
+        <div class="choices">
+            <div class="choice-container">
+                <a href="docs.html" class="choice-btn" onclick="playSound()">
+                    <img src="documentary.jpg" alt="Documentary Icon" class="choice-icon">
+                    <span>Documentary</span>
+                </a>
+            </div>
+            <div class="choice-container">
+                <a href="pics.html" class="choice-btn" onclick="playSound()">
+                    <img src="message.jpg" alt="Pictures Icon" class="choice-icon">
+                    <span>Pictures</span>
+                </a>
+            </div>
+            <div class="choice-container">
+                <a href="mess.html" class="choice-btn" onclick="playSound()">
+                    <img src="picture.jpg" alt="Message Icon" class="choice-icon">
+                    <span>Message</span>
+                </a>
+            </div>
+            <div class="choice-container">
+                <a href="bucketlist.html" class="choice-btn" onclick="playSound()">
+                    <img src="bucketlist.jpg" alt="Bucket List Icon" class="choice-icon">
+                    <span>Bucket List</span>
+                </a>
+            </div>
+        </div>
+        <div class="quote" id="randomQuote"></div>
+    </section>
+    <center><div class="emoji-heart" onclick="increaseHeartCount()">❤️ </div></center>
+
+    <audio id="clickSound" src="clicksound.wav" preload="auto"></audio> <!-- Sound effect for clicks -->
+
+    <script>
+       
+        function playSound() {
+            const sound = document.getElementById('clickSound');
+            sound.currentTime = 0; // Rewind to start
+            sound.play();
+        }
+
+        // Function to increase heart count
+        function increaseHeartCount() {
+            const countElement = document.getElementById('heartCount');
+            let count = parseInt(countElement.innerText);
+            countElement.innerText = count + 1;
+        }
+
+        // Function to display random love quotes
+        const quotes = [
+            "Love is not about possession, it's about appreciation.",
+            "You know you're in love when you can't fall asleep because reality is finally better than your dreams.",
+            "To love and be loved is to feel the sun from both sides.",
+            "Love all, trust a few, do wrong to none.",
+            "Being deeply loved by someone gives you strength while loving someone deeply gives you courage."
+        ];
+
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('randomQuote').innerText = quotes[randomIndex];
+        }
+
+        // Call the function to display a random quote on page load
+        window.onload = displayRandomQuote;
+    </script>
+</body>
+</html>
